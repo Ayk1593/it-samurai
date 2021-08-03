@@ -17,7 +17,7 @@ const DialogsContainer = (props) => {
         let action = updateNewMessageBodyCreator(body);
         props.store.dispatch(action)
     }
-rff
+
     return (<Dialogs updateNewMessageBody={onNewMessageChange} sendMessage={onSendMessageClick}
                      dialogsPage={state}/>)
 }

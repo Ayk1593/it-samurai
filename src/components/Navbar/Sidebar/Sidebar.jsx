@@ -15,8 +15,7 @@ const SidebarItems = (props) => {
 }
 
 const Friends = (props) => {
-
-    let friendsElements = props.state.state.friends.map(f => <SidebarItems name={f.name} id={f.id}/>);
+    let friendsElements = props.friends.map(f => <SidebarItems name={f.name} key={f.id} id={f.id}/>);
     return (
         <div className={s.sidebar}>
             <div>

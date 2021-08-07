@@ -20,16 +20,16 @@ const profileReducer = (state = initialState, action) => {
                 message: state.newPostText,
                 likesCount: 0
             };
-                return {
-                    ...state,
-                    posts: [...state.posts, newPost],
-                    newPostText: ''
-                }
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: ''
+            }
 
 
-            // if (stateCopy.newPostText !== '') {
-            //     stateCopy.posts.push(newPost);
-            // }
+        // if (stateCopy.newPostText !== '') {
+        //     stateCopy.posts.push(newPost);
+        // }
 
         case UPDATE_NEW_POST_TEXT:
             return {

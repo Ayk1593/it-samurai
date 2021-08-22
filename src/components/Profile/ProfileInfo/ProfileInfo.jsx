@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import s from './ProfileInfo.module.css';
 
 
+
 const ProfileINfo = () => {
     return (
         <div className={s.profile}>

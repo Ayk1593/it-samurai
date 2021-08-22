@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
 import s from './../Navbar.module.css';
+import profileImg from '../../../assets/images/profile.png';
 
 
 const SidebarItems = (props) => {
     return (
         <div className={s.friends}>
-            <img src='https://img1.goodfon.ru/wallpaper/nbig/6/4d/avatar-neytiri-zoe-saldana-7414.jpg'/>
+            <img src={profileImg}/>
             <NavLink to={'/friends/' + props.id}>   {props.name}  </NavLink>
         </div>
 

@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import s from './Post.module.css';
+import profileImg from '../../../../assets/images/profile.png'
 
 const Post = (props) => {
     return (
 
         <div className={s.item}>
-            <img src='https://img1.goodfon.ru/wallpaper/nbig/6/4d/avatar-neytiri-zoe-saldana-7414.jpg'/>
+            <img src={profileImg}/>
 
             {props.message}
             <div>

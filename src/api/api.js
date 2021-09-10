@@ -32,7 +32,7 @@ export const userAPI = {
 }
 
 export const authAPI = {
-    authMe() {
+    me() {
         return instance.get(`auth/me`)
             .then(response => {
                 return response.data
@@ -41,7 +41,7 @@ export const authAPI = {
 }
 
 export const profileAPI = {
-    profilePage(userId) {
+    getProfile(userId) {
         return instance.get(`profile/${userId}`)
             .then(response => {
                 return response.data

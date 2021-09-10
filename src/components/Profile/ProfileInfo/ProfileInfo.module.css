@@ -8,5 +8,10 @@
 }
 
 .descriptionBlock img {
+    height: 100px;
+    weight: 100px;
+}
+
+.descriptionBlock img {
     width: auto;
 }

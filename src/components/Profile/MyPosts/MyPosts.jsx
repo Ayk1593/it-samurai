@@ -10,8 +10,10 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef();
 
     let onAddPost = () => {
+        if (props.newPostText !== '') {
         props.addPost();
     }
+}
 
     let onPostChange = () => {
         let text = newPostElement.current.value;

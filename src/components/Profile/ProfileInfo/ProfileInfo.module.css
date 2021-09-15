@@ -15,3 +15,15 @@
 .descriptionBlock img {
     width: auto;
 }
+
+.status{
+    margin-top: 10px;
+    width: 200px;
+}
+
+.profile_status {
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
+}

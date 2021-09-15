@@ -26,7 +26,7 @@ let mapStateToProps = (state) => {
 //     }
 // }
 
-export default  compose(
+export default compose(
     connect(mapStateToProps, {
         updateNewMessageBody,
         sendMessage

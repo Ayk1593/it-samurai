@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {addPost, updateNewPostText} from "../../../redux/profile-reducer";
+import {addPost} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import Dialogs from "../../Dialogs/Dialogs";
@@ -8,7 +8,8 @@ import Dialogs from "../../Dialogs/Dialogs";
 let mapStateToProps = (state) => {
     return {
         posts: state.profilePage.posts,
-        newPostText: state.profilePage.newPostText
+        newPostText: state.profilePage.newPostText,
+        profile: state.profilePage.profile
     }
 }
 
@@ -24,7 +25,6 @@ let mapStateToProps = (state) => {
 // }
 
 const MyPostsContainer = connect(mapStateToProps, {
-    updateNewPostText,
     addPost
 })(MyPosts);
 

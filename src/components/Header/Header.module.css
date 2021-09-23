@@ -1,19 +1,32 @@
 .header {
     grid-area: h;
-    background-color: #008080;
+    background-color: #466cf269;
+    margin: 5px 10px 5px 10px;
+    border-radius: 10px;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
 }
 
+.logo {
+    align-self: flex-start;
+}
 
 .header img {
     width: 20px;
+    margin: 5px;
 }
 
 .loginBlock {
-    float: right;
-    margin: 20px;
+    margin: 5px;
 }
 
 .loginBlock a {
     color: white;
     text-decoration: none;
+}
+
+
+.logout {
+
 }

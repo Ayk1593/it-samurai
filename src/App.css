@@ -1,18 +1,27 @@
-ul li {
-  list-style-type: georgian;
+* {
+    font-family: 'Gemunu Libre', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
+ul li {
+    list-style-type: georgian;
+}
+
+.box {
+    width: auto;
+    height: auto;
+    background-color: #edf0f7;
+}
 
 .app-wrapper {
     display: grid;
     width: 1200px;
+    height: auto;
     margin: 0 auto;
 
-    grid-template-areas:
-    "h h"
-     "n c";
+    grid-template-areas: "h h" "n c";
 
-    grid-template-rows: 60px 1fr;
+    grid-template-rows: auto 1fr;
     grid-template-columns: 2fr 10fr;
     /*grid-gap: 10px;*/
 
@@ -21,9 +30,23 @@ ul li {
 
 .app-wrapper-content {
     grid-area: c;
-    background-color: #66cdaa;
+    background-color: white;
+    margin: 5px 10px 10px 5px;
+    border-radius: 10px;
+
 }
 
+@media screen and (max-width: 800px) {
+    .app-wrapper {
+        grid-template-areas: "h h" "n n" "c c";
+        width: auto;
+    }
+}
+
+
+@media screen and (max-width: 450px) {
+
+}
 
 
 

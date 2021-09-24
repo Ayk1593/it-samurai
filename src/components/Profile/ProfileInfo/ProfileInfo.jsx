@@ -24,7 +24,7 @@ const ProfileINfo = (props) => {
                     {props.profile.contacts.vk}
 
                 </div>
-             <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+             <ProfileStatus status={props.status} updateStatus={props.updateStatus} userId={props.userId} profile={props.profile}/>
             </div>
 
         </div>)

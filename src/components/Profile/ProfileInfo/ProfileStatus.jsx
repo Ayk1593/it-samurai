@@ -33,13 +33,17 @@ class ProfileStatus extends React.Component {
             })
         }
     }
-
+    myStatus = () => {
+        if (this.props.profile.userId === this.props.userId) {
+            this.activateEditMode();
+        }
+    }
     render() {
         return (
             <div className={s.status}>
                 {!this.state.editMode &&
                 <div className={s.profile_status}>
-                    <span onDoubleClick={this.activateEditMode}> {this.props.status || "-----"}</span>
+                    <span onDoubleClick={this.myStatus}> {this.props.status || "-----"}</span>
                 </div>}
                 {this.state.editMode &&
                 <div>

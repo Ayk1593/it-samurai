@@ -2,14 +2,16 @@ import React, {Component} from 'react';
 import {addPost} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
-import Dialogs from "../../Dialogs/Dialogs";
+import {compose} from "redux";
+
 
 
 let mapStateToProps = (state) => {
     return {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText,
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        auth: state.auth.isAuth
     }
 }
 
@@ -24,8 +26,13 @@ let mapStateToProps = (state) => {
 //     }
 // }
 
-const MyPostsContainer = connect(mapStateToProps, {
-    addPost
-})(MyPosts);
+export default compose(
+    connect(mapStateToProps, {addPost})
+)(MyPosts)
 
-export default MyPostsContainer;
+
+// const MyPostsContainer = connect(mapStateToProps, {
+//     addPost
+// })(MyPosts);
+
+// export default MyPostsContainer;

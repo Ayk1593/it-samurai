@@ -1,5 +1,4 @@
 import {profileAPI} from "../api/api";
-import {Redirect} from "react-router-dom";
 import React from "react";
 
 const ADD_POST = 'ADD-POST';

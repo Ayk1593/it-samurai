@@ -14,6 +14,8 @@ const MyPosts = (props) => {
     let onAddPost = (values) => {
             props.addPost(values.newPostText);
     }
+
+
     return (
         props.profile ?
         <div className={s.postsBlock}>

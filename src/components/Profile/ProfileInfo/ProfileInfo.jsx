@@ -7,9 +7,10 @@ import ProfileStatus from './ProfileStatus';
 
 
 const ProfileINfo = (props) => {
-    if (!props.profile) {
+    if (!props.profile && props.auth) {
         return <Preloader />
     }
+
 
     return (
         <div className={s.profile}>

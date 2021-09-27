@@ -1,6 +1,6 @@
-
-import {authAPI, loginApi, profileAPI, userAPI} from "../api/api";
-import {setStatus} from "./profile-reducer";
+import {authAPI} from "../api/api";
+import React from "react";
+import {stopSubmit} from "redux-form";
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA';
 
@@ -13,19 +13,22 @@ let initialState = {
 }
 
 const authReducer = (state = initialState, action) => {
-        switch(action.type) {
-            case SET_AUTH_USER_DATA:
-                return {
-                    ...state,
-                    ...action.payload
-                }
+    switch (action.type) {
+        case SET_AUTH_USER_DATA:
+            return {
+                ...state,
+                ...action.payload
+            }
         default:
             return state;
     }
 
 }
 
-export const setAuthUserData = (userId, email, login, isAuth) => ({type: SET_AUTH_USER_DATA, payload: {userId, email, login, isAuth}})
+export const setAuthUserData = (userId, email, login, isAuth) => ({
+    type: SET_AUTH_USER_DATA,
+    payload: {userId, email, login, isAuth}
+})
 
 
 export const getAuthUserData = () => {
@@ -46,10 +49,13 @@ export const login = (email, password, rememberMe) => {
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(getAuthUserData());
+                } else {
+                    let message = response.data.messages[0];
+                    dispatch(stopSubmit("login", {_error: message}));
                 }
             });
     }
-    }
+}
 
 export const logout = () => {
     return (dispatch) => {
@@ -61,7 +67,6 @@ export const logout = () => {
             });
     }
 }
-
 
 
 export default authReducer;

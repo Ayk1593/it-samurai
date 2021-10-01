@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import s from './Profile.module.css';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";

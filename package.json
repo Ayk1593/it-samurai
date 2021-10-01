@@ -1,5 +1,5 @@
 {
-  "name": "react-kabzda-1",
+  "name": "samuraiJs",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -41,5 +41,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/Ayk1593/it-samurai.git",
+  "author": "Ayk_Israelyan <ayk1593@gmail.com>",
+  "license": "MIT"
 }

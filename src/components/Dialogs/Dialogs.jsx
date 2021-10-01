@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {NavLink, Redirect} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";

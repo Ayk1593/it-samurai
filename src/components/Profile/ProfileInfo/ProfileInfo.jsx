@@ -3,6 +3,7 @@ import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/images/user.png";
 import ProfileStatus from './ProfileStatus';
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 
 
@@ -22,7 +23,7 @@ const ProfileINfo = (props) => {
                     {props.profile.contacts.vk}
 
                 </div>
-             <ProfileStatus status={props.status} updateStatus={props.updateStatus} userId={props.userId} profile={props.profile}/>
+             <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} userId={props.userId} profile={props.profile}/>
             </div>
 
         </div>)

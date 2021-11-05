@@ -14,6 +14,7 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import ProfileContainerWithHooks from "./components/Profile/ProfileContainerWithHooks";
 
 
 class App extends Component {
@@ -33,8 +34,8 @@ class App extends Component {
                     <Navbar/>
                     <div className='app-wrapper-content'>
                         <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                        <Route exact path='/profile' render={() => <ProfileContainer/>}/>
-                        <Route path='/profile/:userId' render={() => <ProfileContainer/>}/>
+                        <Route exact path='/profile' render={() => <ProfileContainerWithHooks/>}/>
+                        <Route path='/profile/:userId' render={() => <ProfileContainerWithHooks/>}/>
                         {/*<Route path='/profile/:userId?' render={ () => <ProfileContainer/> } />*/}
                         <Route path='/news' component={News}/>
                         <Route path='/music' component={Music}/>

@@ -8,7 +8,9 @@ const SidebarItems = (props) => {
     return (
         <div className={s.friends}>
             <img src={profileImg}/>
-            <NavLink to={'/friends/' + props.id}>   {props.name}  </NavLink>
+            <NavLink to={'/friends/' + props.id}>
+                <div className={s.friendsName}> {props.name} </div>
+            </NavLink>
         </div>
 
 

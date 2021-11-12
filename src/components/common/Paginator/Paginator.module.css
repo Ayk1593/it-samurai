@@ -1,0 +1,10 @@
+.selectedPage {
+    font-weight: bold;
+    border: 3px solid #1941d1;
+}
+
+
+.pages {
+    cursor: pointer;
+}
+

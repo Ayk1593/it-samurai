@@ -8,3 +8,16 @@
     cursor: pointer;
 }
 
+.pageNumber {
+    border: 1px solid silver;
+}
+
+.paginator {
+    display: flex;
+}
+
+.btnNext {
+    margin-left: 5px;
+    padding: 3px;
+}
+

@@ -1,15 +1,14 @@
-.selectedPage {
-    font-weight: bold;
-    border: 3px solid #1941d1;
-}
-
-
 .pages {
     cursor: pointer;
 }
 
 .pageNumber {
     border: 1px solid silver;
+}
+
+.selectedPage {
+    font-weight: bold;
+    border: 3px solid #1941d1;
 }
 
 .paginator {

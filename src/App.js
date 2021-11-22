@@ -1,11 +1,10 @@
-import React, {Component} from 'react';
+import React, {Component, Suspense} from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {BrowserRouter, HashRouter, Route, withRouter} from "react-router-dom";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
@@ -13,8 +12,11 @@ import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
-import ProfileContainerWithHooks from "./components/Profile/ProfileContainerWithHooks";
 import store from "./redux/redux-store";
+import {withSuspense} from "./hoc/withSuspense";
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainerWithHooks = React.lazy(() => import('./components/Profile/ProfileContainerWithHooks'));
 
 
 class App extends Component {
@@ -33,9 +35,9 @@ class App extends Component {
                     <HeaderContainer/>
                     <Navbar/>
                     <div className='app-wrapper-content'>
-                        <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                        <Route exact path='/profile' render={() => <ProfileContainerWithHooks/>}/>
-                        <Route path='/profile/:userId' render={() => <ProfileContainerWithHooks/>}/>
+                        <Route path='/dialogs' render={ withSuspense(DialogsContainer)}/>
+                        <Route exact path='/profile' render={ withSuspense(ProfileContainerWithHooks)}/>
+                        <Route path='/profile/:userId' render={ withSuspense(ProfileContainerWithHooks) }/>
                         {/*<Route path='/profile/:userId?' render={ () => <ProfileContainer/> } />*/}
                         <Route path='/news' component={News}/>
                         <Route path='/music' component={Music}/>

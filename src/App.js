@@ -36,9 +36,9 @@ class App extends Component {
                     <Navbar/>
                     <div className='app-wrapper-content'>
                         <Route path='/dialogs' render={ withSuspense(DialogsContainer)}/>
-                        <Route exact path='/profile' render={ withSuspense(ProfileContainerWithHooks)}/>
-                        <Route path='/profile/:userId' render={ withSuspense(ProfileContainerWithHooks) }/>
-                        {/*<Route path='/profile/:userId?' render={ () => <ProfileContainer/> } />*/}
+                        {/*<Route exact path='/profile' render={ withSuspense(ProfileContainerWithHooks)}/>*/}
+                        {/*<Route path='/profile/:userId' render={ withSuspense(ProfileContainerWithHooks) }/>*/}
+                        <Route path='/profile/:userId?' render={ withSuspense(ProfileContainerWithHooks) }/>
                         <Route path='/news' component={News}/>
                         <Route path='/music' component={Music}/>
                         <Route path='/settings' component={Settings}/>

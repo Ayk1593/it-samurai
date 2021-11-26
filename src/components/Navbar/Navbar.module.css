@@ -16,11 +16,16 @@
 }
 
 .item a.active {
+
+    font-weight: bold;
+
+}
+
+.item a:hover {
     color: #1941d1;
     border: 2px solid #1941d1;
     border-radius: 20px;
     font-weight: bold;
-
 }
 
 .sidebar {

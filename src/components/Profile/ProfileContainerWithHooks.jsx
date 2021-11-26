@@ -9,16 +9,23 @@ import {withLogout} from "../../hoc/withLogout";
 
 
 function ProfileContainerWithHooks(props) {
-
-     useEffect(() => {
+     let refreshProfile = () => {
          let userId = props.match.params.userId || props.userId;
          if (!userId) {
              props.history.push("/login")
          }
          props.getUserProfile(userId);
          props.getStatus(userId);
+     }
+
+     useEffect(() => {
+         refreshProfile();
      }, [])
 
+
+    useEffect(() => {
+        refreshProfile();
+    }, [props.match.params.userId])
 
         return (
             <Profile {...props} profile={props.profile} status={props.status}

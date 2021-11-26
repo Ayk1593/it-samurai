@@ -14,7 +14,7 @@ const ProfileINfo = (props) => {
     return (
         <div className={s.profile}>
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large != null ? props.profile.photos.large : userPhoto} />
+                <img src={props.profile.photos.large || userPhoto} />
                 <div>
                     {props.profile.fullName} <br/>
                     {props.profile.contacts.facebook} <br/>

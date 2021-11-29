@@ -59,10 +59,10 @@
 .friendsName {
     padding: 1px;
 }
-.friendsName:hover {
-    border: 2px solid #1941d1;
-    border-radius: 10px;
-}
+/*.friendsName:hover {*/
+/*    border: 2px solid #1941d1;*/
+/*    border-radius: 10px;*/
+/*}*/
 
 .users {
     margin-top: 20px;

@@ -9,20 +9,23 @@
 
 .descriptionBlock img {
     height: 100px;
-    weight: 100px;
-}
-
-.descriptionBlock img {
-    width: auto;
+    width: 100px;
 }
 
 .status{
-    margin-top: 10px;
     width: 200px;
+    margin-bottom: 10px;
 }
 
 .profile_status {
-    font-weight: bold;
     border-radius: 10px;
-    text-align: center;
+
+}
+
+.addAva {
+
+}
+
+.contact {
+    padding-left: 10px;
 }

@@ -4,6 +4,8 @@ import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/images/user.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import ProfileDataForm from "./ProfileDataForm";
+import ProfileDataFormWithReduxForm from "./ProfileDataForm";
+import handleSubmit from "redux-form/lib/handleSubmit";
 
 
 const ProfileINfo = (props) => {
@@ -28,6 +30,13 @@ const ProfileINfo = (props) => {
         }
     }
 
+    const onSubmit = (formData) => {
+        props.saveProfile(formData).then( () => {
+            setEditMode(false);
+        })
+    }
+
+
     return (
         <div className={s.profile}>
             <div className={s.descriptionBlock}>
@@ -41,9 +50,10 @@ const ProfileINfo = (props) => {
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} userId={props.userId}
                                         profile={props.profile}/>
 
-                {editMode
-                    ? <ProfileDataForm profile={props.profile}/>
-                    : <ProfileData profile={props.profile} isOwner={props.isOwner} goToEditMode={() => setEditMode(true)}/>}
+                { editMode
+                    ? <ProfileDataFormWithReduxForm initialValues={props.profile} profile={props.profile} onSubmit={onSubmit}/>
+                    : <ProfileData profile={props.profile} isOwner={props.isOwner}
+                                   goToEditMode={() => setEditMode(true)}/>}
 
 
             </div>
@@ -56,8 +66,18 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
         {isOwner && <div>
             <button onClick={goToEditMode}>Edit</button>
         </div>}
+        <div className={s.fullName}>
+            <h2> <b>  {profile.fullName} </b> </h2>
+        </div>
         <div>
-            {profile.fullName}
+            <b>Looking for a job: </b> {profile.lookingForAJob  ? "yes" : "no"}
+        </div>
+        <div>
+            <b>My professional skills: </b> {profile.lookingForAJobDescription}
+        </div>
+
+        <div>
+            <b> About me: </b> {profile.aboutMe}
         </div>
 
         <div>
@@ -69,9 +89,7 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
 }
 
 
-
-
 const Contact = ({contactTitle, contactValue}) => {
-    return <div className={s.contact}><b>{contactTitle}</b>: {contactValue}</div>
+    return <div className={s.contact}>{contactTitle} : {contactValue}</div>
 }
 export default ProfileINfo;

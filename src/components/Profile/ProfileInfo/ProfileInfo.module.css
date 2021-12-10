@@ -29,3 +29,28 @@
 .contact {
     padding-left: 10px;
 }
+
+.editProfile {
+    padding: 10px;
+}
+
+.editProfileElement {
+    background-color: #d0e2f2;
+    width: 200px;
+    padding: 10px;
+    margin: 10px 10px 10px 0;
+    border: 1px solid silver;
+    border-radius: 10px;
+}
+
+.wrapper1 {
+  display: flex;
+}
+.wrapper2 {
+    display: flex;
+}
+
+textarea {
+    resize: vertical;
+    height: 50px;
+}

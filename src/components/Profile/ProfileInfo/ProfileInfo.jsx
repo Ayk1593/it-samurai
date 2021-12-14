@@ -3,9 +3,7 @@ import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/images/user.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
-import ProfileDataForm from "./ProfileDataForm";
 import ProfileDataFormWithReduxForm from "./ProfileDataForm";
-import handleSubmit from "redux-form/lib/handleSubmit";
 
 
 const ProfileINfo = (props) => {
@@ -31,7 +29,7 @@ const ProfileINfo = (props) => {
     }
 
     const onSubmit = (formData) => {
-        props.saveProfile(formData).then( () => {
+        props.saveProfile(formData).then(() => {
             setEditMode(false);
         })
     }
@@ -50,8 +48,9 @@ const ProfileINfo = (props) => {
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} userId={props.userId}
                                         profile={props.profile}/>
 
-                { editMode
-                    ? <ProfileDataFormWithReduxForm initialValues={props.profile} profile={props.profile} onSubmit={onSubmit}/>
+                {editMode
+                    ? <ProfileDataFormWithReduxForm initialValues={props.profile} profile={props.profile}
+                                                    onSubmit={onSubmit}/>
                     : <ProfileData profile={props.profile} isOwner={props.isOwner}
                                    goToEditMode={() => setEditMode(true)}/>}
 
@@ -67,17 +66,22 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
             <button onClick={goToEditMode}>Edit</button>
         </div>}
         <div className={s.fullName}>
-            <h2> <b>  {profile.fullName} </b> </h2>
-        </div>
-        <div>
-            <b>Looking for a job: </b> {profile.lookingForAJob  ? "yes" : "no"}
-        </div>
-        <div>
-            <b>My professional skills: </b> {profile.lookingForAJobDescription}
+            <h2><b>  {profile.fullName} </b></h2>
         </div>
 
-        <div>
-            <b> About me: </b> {profile.aboutMe}
+        <div className={s.info_box}>
+
+            <div>
+                <b> Looking for a job: </b> {profile.lookingForAJob ? "yes" : "no"}
+            </div>
+            <div>
+                <b> My professional skills: </b> {profile.lookingForAJobDescription}
+            </div>
+
+            <div>
+                <b> About me: </b> {profile.aboutMe}
+            </div>
+
         </div>
 
         <div>

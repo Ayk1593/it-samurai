@@ -27,7 +27,7 @@ const ProfileDataForm = ({profile, handleSubmit, error}) => {
                 </div>
 
                 <div className={s.editProfileElement}>
-                    <b>Looking for a job: </b>
+                    <b> Looking for a job: </b>
                     <Field name={"lookingForAJob"} component={Input} type={"checkbox"}/>
                 </div>
             </div>

@@ -4,11 +4,15 @@ import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/images/user.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import ProfileDataFormWithReduxForm from "./ProfileDataForm";
+import {changeStateEditMode} from "../../../redux/profile-reducer";
 
 
 const ProfileINfo = (props) => {
     let [editMode, setEditMode] = useState(false);
     let [hoveredAva, setHoveredAva] = useState(false);
+    let stateEditMode = (toggle) => {
+        props.changeStateEditMode(toggle);
+    }
 
     let hoverAva = () => {
         setHoveredAva(true);
@@ -46,13 +50,14 @@ const ProfileINfo = (props) => {
                 </div>
 
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} userId={props.userId}
-                                        profile={props.profile}/>
+                                        profile={props.profile} />
 
                 {editMode
                     ? <ProfileDataFormWithReduxForm initialValues={props.profile} profile={props.profile}
-                                                    onSubmit={onSubmit}/>
+                                                    stateEditMode={stateEditMode}
+                                                    onSubmit={onSubmit} />
                     : <ProfileData profile={props.profile} isOwner={props.isOwner}
-                                   goToEditMode={() => setEditMode(true)}/>}
+                                   goToEditMode={() => {setEditMode(true); stateEditMode(true) }}/>}
 
 
             </div>

@@ -2,7 +2,14 @@ import React, {Component, useEffect} from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
-import {getStatus, getUserProfile, savePhoto, saveProfile, updateStatus} from "../../redux/profile-reducer";
+import {
+    changeStateEditMode,
+    getStatus,
+    getUserProfile,
+    savePhoto,
+    saveProfile,
+    updateStatus
+} from "../../redux/profile-reducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {withLogout} from "../../hoc/withLogout";
@@ -30,7 +37,8 @@ function ProfileContainerWithHooks(props) {
         return (
             <Profile {...props} profile={props.profile} status={props.status}
                      updateStatus={props.updateStatus} isOwner={!props.match.params.userId}
-                     savePhoto={props.savePhoto} saveProfile={props.saveProfile}/>
+                     savePhoto={props.savePhoto} saveProfile={props.saveProfile}
+                     changeStateEditMode={props.changeStateEditMode}/>
         )
 }
 
@@ -42,12 +50,13 @@ let mapStateToProps = (state) => {
         status: state.profilePage.status,
         userId: state.auth.userId,
         auth: state.auth.isAuth,
-        formSaved: state.profilePage.formSaved
+        formSaved: state.profilePage.formSaved,
+        stateEditMode: state.profilePage.stateEditMode
     }
 }
 
 export default compose(
-    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus, savePhoto, saveProfile}),
+    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus, savePhoto, saveProfile, changeStateEditMode}),
     withRouter,
     // withLogout,
     withAuthRedirect

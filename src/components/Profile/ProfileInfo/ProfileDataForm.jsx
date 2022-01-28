@@ -5,14 +5,14 @@ import {required} from "../../../utils/validators/validators";
 import {Field, reduxForm} from "redux-form";
 import style from "../../common/FormsControls/FormsControls.module.css";
 
-const ProfileDataForm = ({profile, handleSubmit, error}) => {
+const ProfileDataForm = ({profile, handleSubmit, error, stateEditMode}) => {
 
     return <form onSubmit={handleSubmit}>
 
 
         <div className={s.editProfile}>
             <div>
-                <button>Save</button>
+                <button onClick={() => stateEditMode(false)}>Save</button>
             </div>
 
             { error && <div className={style.formSummaryError}>

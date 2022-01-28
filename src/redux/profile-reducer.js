@@ -9,7 +9,6 @@ const DELETE_POST = 'DELETE_POST';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
 
 
-
 let initialState = {
     posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 15},
@@ -86,16 +85,16 @@ export const getStatus = (userId) => {
     }
 }
 
-export const updateStatus = (status) => {
-    return (dispatch) => {
-        profileAPI.updateStatus(status)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(setStatus(status));
-                }
-            });
+export const updateStatus = (status) =>
+    async (dispatch) => {
+        try {
+            const response = await profileAPI.updateStatus(status);
+            if (response.resultCode === 0) {
+                dispatch(setStatus(status));
+            }
+        } catch (error) {
+        }
     }
-}
 
 export const savePhoto = (file) =>
     async (dispatch) => {
@@ -107,11 +106,11 @@ export const savePhoto = (file) =>
 
 export const saveProfile = (profile) =>
     async (dispatch, getState) => {
-    const userId = getState().auth.userId;
+        const userId = getState().auth.userId;
         const response = await profileAPI.saveProfile(profile);
         if (response.data.resultCode === 0) {
             dispatch(getUserProfile(userId));
-        }  else {
+        } else {
             dispatch(stopSubmit("edit-profile", {_error: response.data.messages[0]}));
             return Promise.reject(response.data.messages[0])
         }

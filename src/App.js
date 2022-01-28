@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {BrowserRouter, HashRouter, Route, withRouter} from "react-router-dom";
+import {BrowserRouter, HashRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
@@ -20,12 +20,14 @@ const ProfileContainerWithHooks = React.lazy(() => import('./components/Profile/
 
 
 class App extends Component {
+
     componentDidMount() {
         this.props.initializeApp();
     }
+
     render() {
         if (!this.props.initialized) {
-            return <Preloader />
+            return <Preloader/>
         }
 
         return (
@@ -35,15 +37,19 @@ class App extends Component {
                     <HeaderContainer/>
                     <Navbar/>
                     <div className='app-wrapper-content'>
-                        <Route path='/dialogs' render={ withSuspense(DialogsContainer)}/>
-                        {/*<Route exact path='/profile' render={ withSuspense(ProfileContainerWithHooks)}/>*/}
-                        {/*<Route path='/profile/:userId' render={ withSuspense(ProfileContainerWithHooks) }/>*/}
-                        <Route path='/profile/:userId?' render={ withSuspense(ProfileContainerWithHooks) }/>
-                        <Route path='/news' component={News}/>
-                        <Route path='/music' component={Music}/>
-                        <Route path='/settings' component={Settings}/>
-                        <Route path='/users' render={() => <UsersContainer/>}/>
-                        <Route path='/login' render={() => <Login/>}/>
+                        <Switch>
+                            <Route exact path='/' render={() => <Redirect to={"/profile"}/>}/>
+                            <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
+                            {/*<Route exact path='/profile' render={ withSuspense(ProfileContainerWithHooks)}/>*/}
+                            {/*<Route path='/profile/:userId' render={ withSuspense(ProfileContainerWithHooks) }/>*/}
+                            <Route path='/profile/:userId?' render={withSuspense(ProfileContainerWithHooks)}/>
+                            <Route path='/news' render={() => <News/>}/>
+                            <Route path='/music' component={Music}/>
+                            <Route path='/settings' component={Settings}/>
+                            <Route path='/users' render={() => <UsersContainer/>}/>
+                            <Route path='/login' render={() => <Login/>}/>
+                            <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
+                        </Switch>
                     </div>
                 </div>
             </div>
@@ -60,12 +66,12 @@ const mapStateToProps = (state) => ({
 let AppContainer = compose(
     withRouter,
     connect(mapStateToProps, {initializeApp}))
-    (App);
+(App);
 
 const SamuraiJSApp = (props) => {
     return <HashRouter>
         <Provider store={store}>
-            <AppContainer />
+            <AppContainer/>
         </Provider>
     </HashRouter>
 }

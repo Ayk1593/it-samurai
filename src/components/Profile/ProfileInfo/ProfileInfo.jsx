@@ -4,7 +4,6 @@ import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/images/user.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import ProfileDataFormWithReduxForm from "./ProfileDataForm";
-import {changeStateEditMode} from "../../../redux/profile-reducer";
 
 
 const ProfileINfo = (props) => {

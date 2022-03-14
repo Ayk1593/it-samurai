@@ -37,7 +37,7 @@ export const authAPI = {
                 return response.data
             });
     },
-    login(email, password, rememberMe = false, captcha = null) {
+    login(email, password, rememberMe = false, captcha) {
         return instance.post(`auth/login`, {email, password, rememberMe, captcha});
     },
     logout() {
@@ -49,15 +49,10 @@ export const authAPI = {
 export const profileAPI = {
     getProfile(userId) {
         return instance.get(`profile/${userId}`)
-            .then(response => {
-                return response.data
-            });
     },
     getStatus(userId) {
         return instance.get(`profile/status/${userId}`)
-            .then(response => {
-                return response.data
-            });
+
     },
     updateStatus(status) {
         return instance.put(`profile/status`, {status: status})

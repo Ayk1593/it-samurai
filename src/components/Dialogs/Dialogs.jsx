@@ -5,7 +5,10 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
-import {Textarea} from "../common/FormsControls/FormsControls";
+import { Textarea, TextareaNew} from "../common/FormsControls/FormsControls";
+import styles from "../common/FormsControls/FormsControls.module.css";
+import {useForm} from "react-hook-form";
+import cn from "classnames";
 
 
 const Dialogs = (props) => {
@@ -32,29 +35,62 @@ const Dialogs = (props) => {
                 {messageElements}
             </div>
             <div>
-                <AddMessageFormRedux onSubmit={addNewMessage}/>
+                <AddNewPostForm onSubmit={addNewMessage}/>
             </div>
         </div>
     )
 }
 
-const maxLength50 = maxLengthCreator(50);
+let AddNewPostForm = (props) => {
+    const {
+        register,
+        formState: {errors, isValid, touchedFields},
+        handleSubmit,
+        reset
+    } = useForm({mode: "onBlur"});
 
-const AddMessageForm = (props) => {
+    const onSubmit = (data) => {
+        props.onSubmit(data)
+        reset();
+    }
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field component={Textarea} name="newMessageBody" placeholder="Enter your message"
-                       validate={[required, maxLength50]}/>
-            </div>
-            <div>
-                <button>Add message</button>
-            </div>
-        </form>
-    )
-}
 
-const AddMessageFormRedux = reduxForm({form: "dialogAddMessageForm"})(AddMessageForm)
+<form onSubmit={handleSubmit(onSubmit)}>
+    <div>
+               <textarea className={cn({[styles.formControlError]: errors?.newMessageBody})}
+                         placeholder="it-kamasutra.com" {...register("newMessageBody", {
+                   required: "Field is required",
+                   maxLength: {
+                       value: 10,
+                       message: "Max length is 10 symbols"
+                   }
+               })}/>
+    </div>
+
+    <div className={styles.formControl}>
+        {errors?.newMessageBody && <div>{errors.newMessageBody?.message || "Error!"} </div>}
+    </div>
+        <button type="submit">Add message</button>
+
+</form> ) }
+
+// const maxLength50 = maxLengthCreator(50);
+//
+// const AddMessageForm = (props) => {
+//     return (
+//         <form onSubmit={props.handleSubmit}>
+//             <div>
+//                 <Field component={Textarea} name="newMessageBody" placeholder="Enter your message"
+//                        validate={[required, maxLength50]}/>
+//             </div>
+//             <div>
+//                 <button>Add message</button>
+//             </div>
+//         </form>
+//     )
+// }
+//
+// const AddMessageFormRedux = reduxForm({form: "dialogAddMessageForm"})(AddMessageForm)
 
 
 export default Dialogs;

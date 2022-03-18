@@ -1,17 +1,35 @@
-import React, {Component, useState} from 'react';
+import React, {ChangeEvent, Component, useEffect, useState} from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/images/user.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import ProfileDataFormWithReduxForm from "./ProfileDataForm";
+import {ProfileType} from "../../../types/types";
+import ProfileDataForm from "./ProfileDataForm";
+import Button from "@mui/material/Button";
 
 
-const ProfileINfo = (props) => {
+// type PropsType = {
+//     changeStateEditMode: (toggle: boolean) => void
+//     profile: ProfileType
+//     auth: boolean
+//     savePhoto: (file: any) => void
+//     saveProfile: (formData: any) => void
+//     isOwner: number
+//     status: string
+//     updateStatus: (status: string) => void
+//     userId: number
+// }
+const ProfileINfo= (props) => {
     let [editMode, setEditMode] = useState(false);
     let [hoveredAva, setHoveredAva] = useState(false);
     let stateEditMode = (toggle) => {
         props.changeStateEditMode(toggle);
     }
+
+    useEffect(() => {
+        stateEditMode(false)
+    }, [])
 
     let hoverAva = () => {
         setHoveredAva(true);
@@ -34,9 +52,9 @@ const ProfileINfo = (props) => {
     const onSubmit = (formData) => {
         props.saveProfile(formData).then(() => {
             setEditMode(false);
+            stateEditMode(false)
         })
     }
-
 
     return (
         <div className={s.profile}>
@@ -49,14 +67,16 @@ const ProfileINfo = (props) => {
                 </div>
 
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} userId={props.userId}
-                                        profile={props.profile} />
+                                        profile={props.profile}/>
 
                 {editMode
-                    ? <ProfileDataFormWithReduxForm initialValues={props.profile} profile={props.profile}
-                                                    stateEditMode={stateEditMode}
-                                                    onSubmit={onSubmit} />
+                    ? <ProfileDataForm initialValues={props.profile} profile={props.profile}
+                                                    onSubmit={onSubmit}/>
                     : <ProfileData profile={props.profile} isOwner={props.isOwner}
-                                   goToEditMode={() => {setEditMode(true); stateEditMode(true) }}/>}
+                                   goToEditMode={() => {
+                                       setEditMode(true);
+                                       stateEditMode(true)
+                                   }}/>}
 
 
             </div>
@@ -64,10 +84,11 @@ const ProfileINfo = (props) => {
         </div>)
 }
 
+
 const ProfileData = ({profile, isOwner, goToEditMode}) => {
     return <div>
         {isOwner && <div>
-            <button onClick={goToEditMode}>Edit</button>
+            <Button variant="contained" onClick={goToEditMode}>Редактировать</Button>
         </div>}
         <div className={s.fullName}>
             <h2><b>  {profile.fullName} </b></h2>
@@ -95,6 +116,7 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
         </div>
     </div>
 }
+
 
 
 const Contact = ({contactTitle, contactValue}) => {

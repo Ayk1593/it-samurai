@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
+import Button from "@mui/material/Button";
 
 const Header = (props) => {
 
@@ -12,7 +13,7 @@ const Header = (props) => {
             <div className={s.loginBlock}>
                 {props.isAuth ? <div> {props.login}
                         <div className={s.logout}>
-                            <button onClick={props.logout}>Log out</button>
+                            <Button size="small" variant="contained" onClick={props.logout}>Log out</Button>
                         </div>
                     </div>
                     :

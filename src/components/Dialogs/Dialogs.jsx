@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect} from 'react';
 import {Redirect} from "react-router-dom";
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
@@ -7,8 +7,11 @@ import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import { Textarea, TextareaNew} from "../common/FormsControls/FormsControls";
 import styles from "../common/FormsControls/FormsControls.module.css";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import cn from "classnames";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import style from "../common/FormsControls/FormsControls.module.css";
 
 
 const Dialogs = (props) => {
@@ -43,54 +46,51 @@ const Dialogs = (props) => {
 
 let AddNewPostForm = (props) => {
     const {
-        register,
         formState: {errors, isValid, touchedFields},
         handleSubmit,
-        reset
-    } = useForm({mode: "onBlur"});
+        reset,
+        control,
+        formState
+    } = useForm();
 
     const onSubmit = (data) => {
         props.onSubmit(data)
-        reset();
     }
+
+    useEffect(() => {
+        if (formState.isSubmitSuccessful) {
+            reset({newMessageBody: ''});
+        }
+    }, [formState, reset]);
+
     return (
 
 <form onSubmit={handleSubmit(onSubmit)}>
-    <div>
-               <textarea className={cn({[styles.formControlError]: errors?.newMessageBody})}
-                         placeholder="it-kamasutra.com" {...register("newMessageBody", {
-                   required: "Field is required",
-                   maxLength: {
-                       value: 10,
-                       message: "Max length is 10 symbols"
-                   }
-               })}/>
+    <div className={style.textArea}>
+        <Controller
+            control={control}
+            name="newMessageBody"
+            rules={{required: "Поле обязательно к заполнению", maxLength: {
+                    value: 100,
+                    message: "Max length is 100 symbols"
+                }}}
+            render={({field}) => (
+                <TextField
+                    label="Введите текст сообщения"
+                    multiline
+                    rows={3}
+                    onChange={(e) => field.onChange(e)}
+                    value={field.value}
+                    error={errors.newMessageBody?.message}
+                    helperText={errors.newMessageBody?.message}
+                />
+            )}
+        />
     </div>
-
-    <div className={styles.formControl}>
-        {errors?.newMessageBody && <div>{errors.newMessageBody?.message || "Error!"} </div>}
-    </div>
-        <button type="submit">Add message</button>
+        <Button variant="contained" type="submit">Add message</Button>
 
 </form> ) }
 
-// const maxLength50 = maxLengthCreator(50);
-//
-// const AddMessageForm = (props) => {
-//     return (
-//         <form onSubmit={props.handleSubmit}>
-//             <div>
-//                 <Field component={Textarea} name="newMessageBody" placeholder="Enter your message"
-//                        validate={[required, maxLength50]}/>
-//             </div>
-//             <div>
-//                 <button>Add message</button>
-//             </div>
-//         </form>
-//     )
-// }
-//
-// const AddMessageFormRedux = reduxForm({form: "dialogAddMessageForm"})(AddMessageForm)
 
 
 export default Dialogs;

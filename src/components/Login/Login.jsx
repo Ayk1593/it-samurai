@@ -1,11 +1,8 @@
 import React from "react";
-import {Field, reduxForm} from "redux-form";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {Redirect, withRouter} from "react-router-dom";
 import {login} from "../../redux/auth-reducer";
-import {Input} from "../common/FormsControls/FormsControls";
-import {required} from "../../utils/validators/validators";
 import style from "../common/FormsControls/FormsControls.module.css"
 import handleSubmit from "redux-form/lib/handleSubmit";
 import {Controller, useForm} from "react-hook-form";
@@ -15,7 +12,6 @@ import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Typography from "@mui/material/Typography";
 
 
 const LoginForm = ({captchaUrl, ...props}) => {
@@ -74,9 +70,11 @@ const LoginForm = ({captchaUrl, ...props}) => {
                 <Controller
                     control={control}
                     name="rememberMe"
-                    render={({field}) => (
+                    render={({field: {onChange, value}}) => (
                         <FormControlLabel
-                            control={<Checkbox />} label="Запомнить меня"
+                            control={<Checkbox
+                                checked={value}
+                                onChange={onChange}/>} label="Запомнить меня"
                         />
                     )}
                 />
@@ -85,11 +83,27 @@ const LoginForm = ({captchaUrl, ...props}) => {
 
             {captchaUrl && <img src={captchaUrl}/>}
             {captchaUrl &&
-            <input  {...register("captcha")} placeholder={"Symbols from image"}/>}
+            <div>
+                <Controller
+                    control={control}
+                    name="captcha"
+                    rules={{required: "Поле обязательно к заполнению"}}
+                    render={({field}) => (
+                        <TextField
+                            size="small"
+                            label="Symbols from image"
+                            onChange={(e) => field.onChange(e)}
+                            value={field.value}
+                            error={errors.captcha?.message}
+                            helperText={errors.captcha?.message}
+                        />
+                    )}
+                /> </div>}
 
             {/*{error && <div className={style.formSummaryError}>*/}
             {/*    {error}*/}
             {/*</div>}*/}
+
             <div className={style.textField}>
                 <Button variant="contained" type="submit">Войти</Button>
             </div>

@@ -1,3 +1,10 @@
+.profilePage {
+    display: flex;
+}
+
+.profile {
+    flex-direction: column;
+}
 
 .profile img {
     width: 100%;
@@ -27,7 +34,17 @@
 }
 
 .contact {
-    padding-left: 10px;
+    padding: 10px;
+}
+
+.contacts {
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+}
+
+.contactProfileInfo {
+  padding-left: 10px;
 }
 
 .editProfile {
@@ -54,4 +71,5 @@ textarea {
     resize: vertical;
     height: 50px;
 }
+
 

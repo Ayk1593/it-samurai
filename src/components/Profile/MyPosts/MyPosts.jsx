@@ -2,11 +2,12 @@ import React, {useEffect} from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post'
 import cn from "classnames";
-import styles from "../../common/FormsControls/FormsControls.module.css";
-import {Field, reduxForm} from "redux-form";
-import {maxLengthCreator, required} from "../../../utils/validators/validators";
-import {Textarea, TextareaNew} from "../../common/FormsControls/FormsControls";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import style from "../../Profile/ProfileInfo/ProfileInfo.module.css"
+import styless from "../../common/FormsControls/FormsControls.module.css"
+import {TextareaControl} from "../../common/FormsControls/FormsControls";
 
 
 const MyPosts = React.memo(props => {
@@ -33,60 +34,54 @@ const MyPosts = React.memo(props => {
 
 let AddNewPostForm = (props) => {
     const {
-        register,
-        formState: {errors, isValid, touchedFields},
+        formState: {errors, isSubmitSuccessful},
         handleSubmit,
-        reset
-    } = useForm({mode: "onBlur"});
+        reset,
+        control,
+        formState
+    } = useForm();
 
     const onSubmit = (data) => {
         props.onSubmit(data)
-        reset();
     }
 
 
+    useEffect(() => {
+        if (formState.isSubmitSuccessful) {
+            reset({something: 'newPostText'});
+        }
+    }, [formState, reset]);
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-               <textarea className={cn({[styles.formControlError]: errors?.newPostText})}
-                         placeholder="it-kamasutra.com" {...register("newPostText", {
-                   required: "Field is required",
-                   maxLength: {
-                       value: 10,
-                       message: "Max length is 10 symbols"
-                   }
-               })}/>
-
-                {/*<TextareaNew className={cn({[styles.formControlError]: errors?.newPostText})}*/}
-                {/*              name="newPostText" register={register} />*/}
-
+            <div className={styless.textArea}>
+                <Controller
+                    control={control}
+                    name="newPostText"
+                    rules={{
+                        required: "Поле обязательно к заполнению", maxLength: {
+                            value: 100,
+                            message: "Max length is 100 symbols"
+                        }
+                    }}
+                    defaultValue=""
+                    render={({field}) => (
+                        <TextField
+                            {...field}
+                            multiline
+                            rows={3}
+                            label="Введите текст поста"
+                            onChange={(e) => field.onChange(e)}
+                            value={field.value}
+                            error={errors.newPostText?.message}
+                            helperText={errors.newPostText?.message}
+                        />
+                    )}
+                />
             </div>
-
-                <div className={styles.formControl}>
-                    {errors?.newPostText && <div>{errors.newPostText?.message || "Error!"} </div>}
-                </div>
-                <button type="submit">Add post</button>
+            <Button variant="contained" type="submit">Add post</Button>
         </form>
     )
 }
-
-// const maxLength10 = maxLengthCreator(10);
-//
-// let AddNewPostForm = (props) => {
-//     return (
-//         <form onSubmit={props.handleSubmit}>
-//             <div>
-//                 <Field name="newPostText" component={Textarea} placeholder="it-kamasutra.com"
-//                        validate={[required, maxLength10]}/>
-//             </div>
-//             <div>
-//                 <button>Add post</button>
-//             </div>
-//         </form>
-//     )
-// }
-//
-// AddNewPostForm = reduxForm({form: "ProfileAddNewPostForm"})(AddNewPostForm)
-
 
 export default MyPosts;

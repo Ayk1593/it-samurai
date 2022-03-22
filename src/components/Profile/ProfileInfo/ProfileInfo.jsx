@@ -3,10 +3,10 @@ import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/images/user.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
-import ProfileDataFormWithReduxForm from "./ProfileDataForm";
 import {ProfileType} from "../../../types/types";
 import ProfileDataForm from "./ProfileDataForm";
 import Button from "@mui/material/Button";
+import style from "./ProfileInfo.module.css";
 
 
 // type PropsType = {
@@ -20,7 +20,7 @@ import Button from "@mui/material/Button";
 //     updateStatus: (status: string) => void
 //     userId: number
 // }
-const ProfileINfo= (props) => {
+const ProfileINfo = (props) => {
     let [editMode, setEditMode] = useState(false);
     let [hoveredAva, setHoveredAva] = useState(false);
     let stateEditMode = (toggle) => {
@@ -64,6 +64,7 @@ const ProfileINfo= (props) => {
                     {(props.isOwner && hoveredAva) &&
                     <input type={"file"} onChange={onMainPhotoSelected} onMouseLeave={unHoverAva}
                            className={s.addAva}/>}
+
                 </div>
 
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} userId={props.userId}
@@ -71,7 +72,7 @@ const ProfileINfo= (props) => {
 
                 {editMode
                     ? <ProfileDataForm initialValues={props.profile} profile={props.profile}
-                                                    onSubmit={onSubmit}/>
+                                       onSubmit={onSubmit}/>
                     : <ProfileData profile={props.profile} isOwner={props.isOwner}
                                    goToEditMode={() => {
                                        setEditMode(true);
@@ -118,8 +119,7 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
 }
 
 
-
 const Contact = ({contactTitle, contactValue}) => {
-    return <div className={s.contact}>{contactTitle} : {contactValue}</div>
+    return <div className={s.contactProfileInfo}>{contactTitle} : {contactValue}</div>
 }
 export default ProfileINfo;

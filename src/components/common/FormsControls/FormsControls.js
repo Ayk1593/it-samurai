@@ -1,6 +1,8 @@
 import React, {forwardRef} from "react";
 import styles from "./FormsControls.module.css";
 import cn from "classnames";
+import {Controller, useForm} from "react-hook-form";
+import TextField from "@mui/material/TextField";
 
 // const FormControl = forwardRef((props) => {
 //     debugger;
@@ -54,7 +56,6 @@ export const InputNew = ({name, register, errors}) => (
 );
 
 export const TextareaNew = ({name, register}) => {
-    debugger;
     return (
         <>
         <textarea  {...register(name, {
@@ -68,3 +69,40 @@ export const TextareaNew = ({name, register}) => {
         </>
     )
 };
+
+
+
+
+// export const TextareaControl= ({name, label}) => {
+//     const {
+//         formState: {errors},
+//         control
+//     } = useForm({mode: "onBlur"});
+//     return (
+//         <>
+//             <Controller
+//                 control={control}
+//                 name={name}
+//                 rules={{
+//                     required: "Поле обязательно к заполнению", maxLength: {
+//                         value: 100,
+//                         message: "Max length is 100 symbols"
+//                     }
+//                 }}
+//                 defaultValue=""
+//                 render={({field}) => (
+//                     <TextField
+//                         {...field}
+//                         multiline
+//                         rows={3}
+//                         label={label}
+//                         onChange={(e) => field.onChange(e)}
+//                         value={field.value}
+//                         error={errors.name?.message}
+//                         helperText={errors.name?.message}
+//                     />
+//                 )}
+//             />
+//     </>
+//     )
+// }

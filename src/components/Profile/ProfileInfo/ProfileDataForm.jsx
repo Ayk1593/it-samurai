@@ -1,18 +1,17 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
-import {Input, Textarea} from "../../common/FormsControls/FormsControls";
-import {required} from "../../../utils/validators/validators";
-import {Field, reduxForm} from "redux-form";
 import style from "../../common/FormsControls/FormsControls.module.css";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Checkbox from "@mui/material/Checkbox";
 
-const ProfileDataForm = ({profile,  error, stateEditMode, ...props}) => {
+const ProfileDataForm = ({profile, error, stateEditMode, ...props}) => {
     const {
-        register,
+        control,
         formState: {errors},
         handleSubmit
-    } = useForm({defaultValues: {}});
+    } = useForm({mode: "onBlur"});
 
     const onSubmit = (data) => {
         props.onSubmit(data)
@@ -24,21 +23,52 @@ const ProfileDataForm = ({profile,  error, stateEditMode, ...props}) => {
                 <Button variant="contained" type="submit">Save</Button>
             </div>
 
-            { error && <div className={style.formSummaryError}>
+            {error && <div className={style.formSummaryError}>
                 {error}
-            </div> }
+            </div>}
 
             <div className={s.wrapper1}>
                 <div className={s.editProfileElement}>
                     <h3><b> Full name: </b></h3>
-                    <input {...register ("fullName", {
-                        required: "Field is required"})} name={"fullName"} placeholder={"Full name"}  />
+                    <Controller
+                        control={control}
+                        name="fullName"
+                        defaultValue={profile.fullName}
+                        rules={{
+                            required: "Поле обязательно к заполнению", maxLength: {
+                                value: 20,
+                                message: "Max length is 20 symbols"
+                            }
+                        }}
+                        render={({field}) => (
+                            <TextField
+                                variant="filled"
+                                size="small"
+                                {...field}
+                                label="Введите ваше имя"
+                                onChange={(e) => field.onChange(e)}
+                                value={field.value}
+                                error={errors.fullName?.message}
+                                helperText={errors.fullName?.message}
+                            />
+                        )}
+                    />
                 </div>
 
                 <div className={s.editProfileElement}>
                     <b> Looking for a job: </b>
-                    <input {...register ("lookingForAJob", {
-                       })} type={"checkbox"}/>
+                    <Controller
+                        control={control}
+                        name="lookingForAJob"
+                        defaultValue={profile.lookingForAJob}
+                        render={({field: {onChange, value}}) => (
+                            <Checkbox
+                                checked={value}
+                                onChange={onChange}
+                                label=""/>
+
+                        )}
+                    />
                 </div>
             </div>
 
@@ -46,26 +76,100 @@ const ProfileDataForm = ({profile,  error, stateEditMode, ...props}) => {
 
                 <div className={s.editProfileElement}>
                     <b>My professional skills: </b>
-                    <textarea {...register ("lookingForAJobDescription", {
-                        required: "Field is required"})}placeholder={"My professional skills"}
-                           />
+                    <Controller
+                        control={control}
+                        name="lookingForAJobDescription"
+                        defaultValue={profile.lookingForAJobDescription}
+                        rules={{
+                            required: "Поле обязательно к заполнению", maxLength: {
+                                value: 100,
+                                message: "Max length is 100 symbols"
+                            }
+                        }}
+                        render={({field}) => (
+                            <TextField
+                                variant="filled"
+                                multiline
+                                rows={3}
+                                {...field}
+                                label="My professional skills"
+                                onChange={(e) => field.onChange(e)}
+                                value={field.value}
+                                error={errors.lookingForAJobDescription?.message}
+                                helperText={errors.lookingForAJobDescription?.message}
+                            />
+                        )}
+                    />
                 </div>
 
                 <div className={s.editProfileElement}>
                     <b> About me: </b>
-                    <textarea {...register ("aboutMe", {
-                        required: "Field is required"})}placeholder={"About me"}/>
+                    <Controller
+                        control={control}
+                        name="aboutMe"
+                        defaultValue={profile.aboutMe}
+                        rules={{
+                            required: "Поле обязательно к заполнению", maxLength: {
+                                value: 100,
+                                message: "Max length is 100 symbols"
+                            }
+                        }}
+                        render={({field}) => (
+                            <TextField
+                                variant="filled"
+                                multiline
+                                rows={3}
+                                {...field}
+                                label="About me"
+                                onChange={(e) => field.onChange(e)}
+                                value={field.value}
+                                error={errors.aboutMe?.message}
+                                helperText={errors.aboutMe?.message}
+                            />
+                        )}
+                    />
                 </div>
             </div>
 
             <div>
-                <b>Contacts:</b> {Object.keys(profile.contacts).map(key => {
-                // let name="contacts." + key
-                return <div key={key} className={s.contact}>
-                    <b> {key}: <div> <input {...register ("name", {
-                       })}placeholder={key} name={"contacts." + key} /> </div> </b>
+                <b>Contacts:</b>
+                <div className={s.contacts}>{Object.keys(profile.contacts).map(key => {
+                    // let name="contacts." + key
+                    let defVal = profile.contacts.key
+
+                    return <div key={key} className={s.contact}>
+                        <b> {key}: </b>
+                        <div>
+                            <Controller
+                                control={control}
+                                name={"contacts." + key}
+                                defaultValue={defVal}
+                                rules={{
+                                    maxLength: {
+                                        value: 5,
+                                        message: "Max length is 100 symbols"
+                                    }
+                                }}
+                                render={({field}) => (
+                                    <TextField
+                                        variant="filled"
+                                        size="small"
+                                        {...field}
+                                        label={key}
+                                        onChange={(e) => field.onChange(e)}
+                                        value={field.value}
+                                        error={errors.contacts?.message}
+                                        helperText={errors.contacts?.message}
+                                    />
+                                )}
+                            />
+                            {/* <input {...register ("name", {*/}
+                            {/*})}placeholder={key} name={"contacts." + key} /> */}
+
+                        </div>
+                    </div>
+                })}
                 </div>
-            })}
             </div>
         </div>
     </form>

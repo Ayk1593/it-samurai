@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import ProfileINfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import {changeStateEditMode} from "../../redux/profile-reducer";
+import style from "../Profile/ProfileInfo/ProfileInfo.module.css"
 
 
 const Profile = (props) => {
 
     return (
-        <div>
+        <div className={style.profilePage}>
 
             <ProfileINfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}
                          userId={props.userId} auth={props.auth} isOwner={props.isOwner}

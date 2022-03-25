@@ -79,7 +79,7 @@ let AddNewPostForm = (props) => {
                     )}
                 />
             </div>
-            <Button variant="contained" type="submit">Add post</Button>
+            <Button variant="outlined" type="submit">Добавить пост</Button>
         </form>
     )
 }

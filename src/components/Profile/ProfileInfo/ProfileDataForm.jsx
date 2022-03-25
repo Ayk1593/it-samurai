@@ -20,7 +20,7 @@ const ProfileDataForm = ({profile, error, stateEditMode, ...props}) => {
 
         <div className={s.editProfile}>
             <div>
-                <Button variant="contained" type="submit">Save</Button>
+                <Button variant="outlined" type="submit">Сохранить</Button>
             </div>
 
             {error && <div className={style.formSummaryError}>
@@ -174,45 +174,7 @@ const ProfileDataForm = ({profile, error, stateEditMode, ...props}) => {
         </div>
     </form>
 
-    // <form onSubmit={handleSubmit}>
-    //
-    //
-    //     <div className={s.editProfile}>
-    //         <div>
-    //             <button onClick={() => stateEditMode(false)}>Save</button>
-    //         </div>
-    //
-    //         { error && <div className={style.formSummaryError}>
-    //             {error}
-    //         </div> }
-    //
-    //
-    //         <div className={s.wrapper1}>
-    //             <div className={s.editProfileElement}>
-    //                 <h3><b> Full name: </b></h3>
-    //                 <Field placeholder={"Full name"} name={"fullName"} component="input" validate={[required]}/>
-    //             </div>
-    //
-    //             <div className={s.editProfileElement}>
-    //                 <b> Looking for a job: </b>
-    //                 <Field name={"lookingForAJob"} component={Input} type={"checkbox"}/>
-    //             </div>
-    //         </div>
-    //
-    //         <div className={s.wrapper2}>
-    //
-    //             <div className={s.editProfileElement}>
-    //                 <b>My professional skills: </b>
-    //                 <Field placeholder={"My professional skills"} name={"lookingForAJobDescription"}
-    //                        component={Textarea} validate={[required]}/>
-    //             </div>
-    //
-    //             <div className={s.editProfileElement}>
-    //                 <b> About me: </b>
-    //                 <Field placeholder={"About me"} name={"aboutMe"} component={Textarea} validate={[required]}/>
-    //             </div>
-    //         </div>
-    //
+
     //         <div>
     //             <b>Contacts:</b> {Object.keys(profile.contacts).map(key => {
     //             return <div key={key} className={s.contact}>
@@ -221,9 +183,9 @@ const ProfileDataForm = ({profile, error, stateEditMode, ...props}) => {
     //         })}
     //         </div>
     //     </div>
-    // </form>
+
 }
 
-// const ProfileDataFormWithReduxForm = reduxForm({form: 'edit-profile'})(ProfileDataForm)
+
 export default ProfileDataForm;
 

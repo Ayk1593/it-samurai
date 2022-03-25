@@ -13,7 +13,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 
 const LoginForm = ({captchaUrl, isIncorrectLogOrPass, errorMessage, captchaUrlNull, isIncorrect, ...props}) => {
     const {
-        register,
         formState: {errors},
         handleSubmit,
         control
@@ -102,9 +101,6 @@ const LoginForm = ({captchaUrl, isIncorrectLogOrPass, errorMessage, captchaUrlNu
                     )}
                 /> </div>}
 
-            {/*{error && <div className={style.formSummaryError}>*/}
-            {/*    {error}*/}
-            {/*</div>}*/}
 
             <div className={style.textField}>
                 <Button variant="contained" type="submit">Войти</Button>

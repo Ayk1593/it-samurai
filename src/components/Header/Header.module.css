@@ -5,17 +5,9 @@
     border-radius: 10px;
     height: auto;
     display: flex;
-    justify-content: flex-end;
+   justify-content: flex-end;
 }
 
-.logo {
-    align-self: flex-start;
-}
-
-.header img {
-    width: 20px;
-    margin: 5px;
-}
 
 .loginBlock {
     margin: 5px;
@@ -29,4 +21,9 @@
 
 .logout {
 
+}
+
+.login {
+    display: flex;
+    align-self: flex-end;
 }

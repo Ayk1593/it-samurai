@@ -9,13 +9,13 @@ const Header = (props) => {
     return (
         <header className={s.header}>
             <div className={s.loginBlock}>
-                {props.isAuth ? <div> {props.login}
+                {props.isAuth ? <div> <div>{props.login}</div>
                         <div className={s.logout}>
-                            <Button size="small" variant="contained" onClick={props.logout}>Log out</Button>
+                            <Button size="small" variant="contained" onClick={props.logout}>Выйти</Button>
                         </div>
                     </div>
                     :
-                    <NavLink to={'/login'}>Login</NavLink>}
+                    <NavLink to={'/login'}>Войти</NavLink>}
 
             </div>
         </header>

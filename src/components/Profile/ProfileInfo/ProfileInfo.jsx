@@ -7,6 +7,8 @@ import {ProfileType} from "../../../types/types";
 import ProfileDataForm from "./ProfileDataForm";
 import Button from "@mui/material/Button";
 import style from "./ProfileInfo.module.css";
+import styled from "@mui/material/styles/styled";
+import Stack from "@mui/material/Stack";
 
 
 // type PropsType = {
@@ -55,15 +57,26 @@ const ProfileINfo = (props) => {
             stateEditMode(false)
         })
     }
+    const Input = styled('input')({
+        display: 'none',
+    });
 
     return (
         <div className={s.profile}>
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large || userPhoto} onMouseOver={hoverAva}/>
+                <img src={props.profile.photos.large || userPhoto} onMouseOver={hoverAva} />
                 <div>
                     {(props.isOwner && hoveredAva) &&
-                    <input type={"file"} onChange={onMainPhotoSelected} onMouseLeave={unHoverAva}
-                           className={s.addAva}/>}
+                    // <input type={"file"} onChange={onMainPhotoSelected} onMouseLeave={unHoverAva}
+                    //        className={s.addAva}/>}
+                    <div>
+                        <label htmlFor="contained-button-file">
+                            <Input onChange={onMainPhotoSelected}  accept="image/*"
+                                   id="contained-button-file" multiple type="file"/>
+                            <Button variant="outlined" onMouseLeave={unHoverAva} component="span">Загрузить фото</Button>
+                        </label>
+                    </div>}
+
 
                 </div>
 
@@ -89,7 +102,7 @@ const ProfileINfo = (props) => {
 const ProfileData = ({profile, isOwner, goToEditMode}) => {
     return <div>
         {isOwner && <div>
-            <Button variant="contained" onClick={goToEditMode}>Редактировать</Button>
+            <Button variant="outlined" onClick={goToEditMode}>Редактировать</Button>
         </div>}
         <div className={s.fullName}>
             <h2><b>  {profile.fullName} </b></h2>

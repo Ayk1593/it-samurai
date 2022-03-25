@@ -4,6 +4,8 @@ import {stopSubmit} from "redux-form";
 
 const SET_AUTH_USER_DATA = 'samurai-network/auth/SET_AUTH_USER_DATA';
 const GET_CAPTCHA_URL_SUCCESS = 'samurai-network/auth/GET_CAPTCHA_URL_SUCCESS';
+const CAPTCHA_URL_NULL = 'samurai-network/auth/CAPTCHA_URL_NULL';
+const INCORRECT_LOG_OR_PASS = 'samurai-network/auth/INCORRECT_LOG_OR_PASS';
 
 
 let initialState = {
@@ -11,7 +13,9 @@ let initialState = {
     email: null as string | null,
     login: null as string | null,
     isAuth: false,
-    captchaUrl: null as string | null
+    captchaUrl: null as string | null,
+    isIncorrectLogOrPass: false,
+    errorMessage: null as string | null
 }
 
 export type InitialStateType = typeof initialState
@@ -23,6 +27,17 @@ const authReducer = (state = initialState, action: any): InitialStateType => {
             return {
                 ...state,
                 ...action.payload
+            }
+        case CAPTCHA_URL_NULL:
+            return {
+                ...state,
+                captchaUrl: action.captchaUrl
+            }
+        case INCORRECT_LOG_OR_PASS:
+            return {
+                ...state,
+                isIncorrectLogOrPass: action.isIncorrectLogOrPass,
+                errorMessage: action.errorMessage
             }
         default:
             return state;
@@ -55,6 +70,25 @@ export const getCaptchaUrlSuccess = (captchaUrl: string): getCaptchaUrlSuccessAc
     payload: {captchaUrl}
 })
 
+type captchaUrlNullActionType = {
+    type: typeof CAPTCHA_URL_NULL,
+    captchaUrl: null
+}
+export const captchaUrlNull = (captchaUrl: null = null): captchaUrlNullActionType => ({
+    type: CAPTCHA_URL_NULL,
+    captchaUrl
+})
+
+
+type isIncorrectActionType = {
+    type: typeof INCORRECT_LOG_OR_PASS,
+    isIncorrectLogOrPass: boolean,
+    errorMessage: string
+
+}
+export const isIncorrect = (isIncorrectLogOrPass: boolean, errorMessage: string): isIncorrectActionType => ({type: INCORRECT_LOG_OR_PASS, isIncorrectLogOrPass, errorMessage});
+
+
 
 export const getAuthUserData = () => {
     return async (dispatch: any) => {
@@ -76,8 +110,9 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
             if (response.data.resultCode === 10) {
                 dispatch(getCaptchaUrl())
             }
-            let message = response.data.messages[0];
-            dispatch(stopSubmit("login", {_error: message}));
+            let errorMessage = response.data.messages[0];
+            // dispatch(stopSubmit("login", {_error: message}));
+            dispatch(isIncorrect(true, errorMessage));
         }
     }
 }
@@ -89,6 +124,7 @@ export const getCaptchaUrl = () => {
         dispatch(getCaptchaUrlSuccess(captchaUrl))
     }
 }
+
 
 export const logout = () => {
     return async (dispatch: any) => {

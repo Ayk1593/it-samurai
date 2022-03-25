@@ -1,20 +1,17 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {Redirect, withRouter} from "react-router-dom";
-import {login} from "../../redux/auth-reducer";
+import {captchaUrlNull, isIncorrect, login} from "../../redux/auth-reducer";
 import style from "../common/FormsControls/FormsControls.module.css"
-import handleSubmit from "redux-form/lib/handleSubmit";
 import {Controller, useForm} from "react-hook-form";
-import styles from "../common/FormsControls/FormsControls.module.css";
-import cn from "classnames";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
 
-const LoginForm = ({captchaUrl, ...props}) => {
+const LoginForm = ({captchaUrl, isIncorrectLogOrPass, errorMessage, captchaUrlNull, isIncorrect, ...props}) => {
     const {
         register,
         formState: {errors},
@@ -25,6 +22,11 @@ const LoginForm = ({captchaUrl, ...props}) => {
     const onSubmit = (data) => {
         props.onSubmit(data)
     }
+
+    useEffect(() => {
+       captchaUrlNull();
+       isIncorrect(false);
+    }, [])
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -65,7 +67,7 @@ const LoginForm = ({captchaUrl, ...props}) => {
                     )}
                 />
             </div>
-
+            {isIncorrectLogOrPass && <div className={style.incorrect}>{errorMessage}</div>}
             <div className={style.textField}>
                 <Controller
                     control={control}
@@ -83,7 +85,7 @@ const LoginForm = ({captchaUrl, ...props}) => {
 
             {captchaUrl && <img src={captchaUrl}/>}
             {captchaUrl &&
-            <div>
+            <div className={style.inputCaptcha}>
                 <Controller
                     control={control}
                     name="captcha"
@@ -107,73 +109,11 @@ const LoginForm = ({captchaUrl, ...props}) => {
             <div className={style.textField}>
                 <Button variant="contained" type="submit">Войти</Button>
             </div>
+
         </form>
     )
 }
 
-
-// <form onSubmit={handleSubmit(onSubmit)}>
-//     <div>
-//         <input className={cn({[styles.formControlError]: errors?.email})}
-//                {...register ("email", {
-//                    required: "Field is required"})} placeholder={"Email"}  />
-//         <div className={styles.formControl}>
-//             {errors?.email && <div>{errors.email?.message || "Error!"} </div>}
-//         </div>
-//     </div>
-//     <div>
-//         <input className={cn({[styles.formControlError]: errors?.password})}
-//                {...register ("password", {
-//                    required: "Field is required"})} placeholder={"Password"}  type="password" />
-//     </div>
-//     <div className={styles.formControl}>
-//         {errors?.password && <div>{errors.password?.message || "Error!"} </div>}
-//     </div>
-//     <div>
-//         <input {...register ("rememberMe")} type={"checkbox"}/> remember me
-//     </div>
-//
-//     {captchaUrl && <img src={captchaUrl}/>}
-//     {captchaUrl &&
-//     <input  {...register ("captcha")} placeholder={"Symbols from image"}/>}
-//
-//     {/*{error && <div className={style.formSummaryError}>*/}
-//     {/*    {error}*/}
-//     {/*</div>}*/}
-//     <div>
-//         <button type="submit">Login</button>
-//     </div>
-// </form>
-
-// const LoginForm = ({handleSubmit, error, captchaUrl}) => {
-//     return (
-//         <form onSubmit={handleSubmit}>
-//             <div>
-//                 <Field placeholder={"Email"} name={"email"} component={Input} validate={[required]}/>
-//             </div>
-//             <div>
-//                 <Field placeholder={"Password"} name={"password"} component={Input} type={"password"}
-//                        validate={[required]}/>
-//             </div>
-//             <div>
-//                 <Field component={Input} name={"rememberMe"} type={"checkbox"}/> remember me
-//             </div>
-//
-//             {captchaUrl && <img src={captchaUrl}/>}
-//             {captchaUrl &&
-//             <Field placeholder={"Symbols from image"} name={"captcha"} component={Input} validate={[required]}/>}
-//
-//             {error && <div className={style.formSummaryError}>
-//                 {error}
-//             </div>}
-//             <div>
-//                 <button>Login</button>
-//             </div>
-//         </form>
-//     )
-// }
-//
-// const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
 const Login = (props) => {
     const onSubmit = (formData) => {
@@ -187,21 +127,27 @@ const Login = (props) => {
     return (
         <div>
             <h2 className={style.textField}>Вход</h2>
-            <LoginForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
+            <LoginForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} isIncorrectLogOrPass={props.isIncorrectLogOrPass}
+                       errorMessage={props.errorMessage}
+                       captchaUrlNull={props.captchaUrlNull}
+                       isIncorrect={props.isIncorrect}/>
         </div>
     )
 }
 
 
 let mapStateToProps = (state) => {
+    debugger
     return {
         isAuth: state.auth.isAuth,
-        captchaUrl: state.auth.captchaUrl
+        captchaUrl: state.auth.captchaUrl,
+        isIncorrectLogOrPass: state.auth.isIncorrectLogOrPass,
+        errorMessage: state.auth.errorMessage
     }
 }
 
 export default compose(
-    connect(mapStateToProps, {login}),
+    connect(mapStateToProps, {login, captchaUrlNull, isIncorrect}),
     withRouter
 )(Login)
 

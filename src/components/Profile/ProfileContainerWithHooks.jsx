@@ -13,6 +13,7 @@ import {
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {withLogout} from "../../hoc/withLogout";
+import {getUsers} from "../../redux/users-selectors";
 
 
 function ProfileContainerWithHooks(props) {
@@ -38,7 +39,7 @@ function ProfileContainerWithHooks(props) {
             <Profile {...props} profile={props.profile} status={props.status}
                      updateStatus={props.updateStatus} isOwner={!props.match.params.userId}
                      savePhoto={props.savePhoto} saveProfile={props.saveProfile}
-                     changeStateEditMode={props.changeStateEditMode}/>
+                     changeStateEditMode={props.changeStateEditMode} userId={props.match.params.userId}/>
         )
 }
 
@@ -46,6 +47,7 @@ function ProfileContainerWithHooks(props) {
 
 let mapStateToProps = (state) => {
     return {
+        users: getUsers(state),
         profile: state.profilePage.profile,
         status: state.profilePage.status,
         userId: state.auth.userId,

@@ -2,6 +2,7 @@ import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/user.png";
 import React from "react";
 import {NavLink} from "react-router-dom";
+import FollowingContainer from "./Folllow";
 
 
 let User = ({user, followingInProgress, follow, unfollow, ...props }) => {
@@ -16,6 +17,7 @@ let User = ({user, followingInProgress, follow, unfollow, ...props }) => {
                                      className={styles.usersPhoto}/>
                             </NavLink>
                         </div>
+
                         <div>
                             {user.followed
                                 ? <button disabled={followingInProgress.some(id => id === user.id)}

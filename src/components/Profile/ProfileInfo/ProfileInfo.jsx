@@ -9,6 +9,8 @@ import Button from "@mui/material/Button";
 import style from "./ProfileInfo.module.css";
 import styled from "@mui/material/styles/styled";
 import Stack from "@mui/material/Stack";
+import FollowingContainer from "../../Users/Folllow";
+import User from "../../Users/User";
 
 
 // type PropsType = {
@@ -76,8 +78,6 @@ const ProfileINfo = (props) => {
                             <Button variant="outlined" onMouseLeave={unHoverAva} component="span">Загрузить фото</Button>
                         </label>
                     </div>}
-
-
                 </div>
 
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} userId={props.userId}

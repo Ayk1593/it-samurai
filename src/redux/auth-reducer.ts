@@ -1,12 +1,9 @@
-import {authAPI, securityAPI} from "../api/api";
-import {stopSubmit} from "redux-form";
-
+import {authAPI, ResultCodesEnum, ResultCodesForCaptcha, securityAPI} from "../api/api";
 
 const SET_AUTH_USER_DATA = 'samurai-network/auth/SET_AUTH_USER_DATA';
 const GET_CAPTCHA_URL_SUCCESS = 'samurai-network/auth/GET_CAPTCHA_URL_SUCCESS';
 const CAPTCHA_URL_NULL = 'samurai-network/auth/CAPTCHA_URL_NULL';
 const INCORRECT_LOG_OR_PASS = 'samurai-network/auth/INCORRECT_LOG_OR_PASS';
-
 
 let initialState = {
     userId: null as number | null,
@@ -84,7 +81,6 @@ type isIncorrectActionType = {
     type: typeof INCORRECT_LOG_OR_PASS,
     isIncorrectLogOrPass: boolean,
     errorMessage: string
-
 }
 export const isIncorrect = (isIncorrectLogOrPass: boolean, errorMessage: string): isIncorrectActionType => ({type: INCORRECT_LOG_OR_PASS, isIncorrectLogOrPass, errorMessage});
 
@@ -93,7 +89,7 @@ export const isIncorrect = (isIncorrectLogOrPass: boolean, errorMessage: string)
 export const getAuthUserData = () => {
     return async (dispatch: any) => {
         let data = await authAPI.me()
-        if (data.resultCode === 0) {
+        if (data.resultCode === ResultCodesEnum.Success) {
             let {id, email, login} = data.data
             dispatch(setAuthUserData(id, email, login, true));
         }
@@ -103,14 +99,14 @@ export const getAuthUserData = () => {
 
 export const login = (email: string, password: string, rememberMe: boolean, captcha: string) => {
     return async (dispatch: any) => {
-        let response = await authAPI.login(email, password, rememberMe, captcha)
-        if (response.data.resultCode === 0) {
+        let data = await authAPI.login(email, password, rememberMe, captcha)
+        if (data.resultCode === ResultCodesEnum.Success) {
             dispatch(getAuthUserData());
         } else {
-            if (response.data.resultCode === 10) {
+            if (data.resultCode === ResultCodesForCaptcha.CaptchaIsRequired) {
                 dispatch(getCaptchaUrl())
             }
-            let errorMessage = response.data.messages[0];
+            let errorMessage = data.messages[0];
             // dispatch(stopSubmit("login", {_error: message}));
             dispatch(isIncorrect(true, errorMessage));
         }

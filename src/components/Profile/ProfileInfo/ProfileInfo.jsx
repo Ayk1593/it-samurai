@@ -1,17 +1,11 @@
-import React, {ChangeEvent, Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/images/user.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
-import {ProfileType} from "../../../types/types";
 import ProfileDataForm from "./ProfileDataForm";
 import Button from "@mui/material/Button";
-import style from "./ProfileInfo.module.css";
 import styled from "@mui/material/styles/styled";
-import Stack from "@mui/material/Stack";
-import FollowingContainer from "../../Users/Folllow";
-import User from "../../Users/User";
-
 
 // type PropsType = {
 //     changeStateEditMode: (toggle: boolean) => void
@@ -71,7 +65,7 @@ const ProfileINfo = (props) => {
                     {(props.isOwner && hoveredAva) &&
                     // <input type={"file"} onChange={onMainPhotoSelected} onMouseLeave={unHoverAva}
                     //        className={s.addAva}/>}
-                    <div>
+                    <div className={s.btnFile}>
                         <label htmlFor="contained-button-file">
                             <Input onChange={onMainPhotoSelected}  accept="image/*"
                                    id="contained-button-file" multiple type="file"/>

@@ -2,7 +2,7 @@ import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/user.png";
 import React from "react";
 import {NavLink} from "react-router-dom";
-import FollowingContainer from "./Folllow";
+import Button from "@mui/material/Button";
 
 
 let User = ({user, followingInProgress, follow, unfollow, ...props }) => {
@@ -20,13 +20,13 @@ let User = ({user, followingInProgress, follow, unfollow, ...props }) => {
 
                         <div>
                             {user.followed
-                                ? <button disabled={followingInProgress.some(id => id === user.id)}
+                                ? <Button  variant="outlined" disabled={followingInProgress.some(id => id === user.id)}
                                           onClick={() => { unfollow(user.id); }}>
-                                    Unfollow</button>
-                                : <button disabled=
+                                    Unfollow</Button>
+                                : <Button  variant="outlined" disabled=
                                               {followingInProgress.some(id => id === user.id)}
                                           onClick={() => { follow(user.id); }}>
-                                    Follow</button>}
+                                    Follow</Button>}
 
                         </div>
                     </div>

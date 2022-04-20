@@ -2,12 +2,22 @@ import React, {Component} from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 import Button from "@mui/material/Button";
+import styled from 'styled-components';
+
+const HeaderStyle = styled.header`
+    grid-area: h;
+    background-color: #466cf269;
+    margin: 5px 10px 5px 10px;
+    border-radius: 10px;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+`
+
 
 const Header = (props) => {
-
-
     return (
-        <header className={s.header}>
+        <HeaderStyle>
             <div className={s.loginBlock}>
                 {props.isAuth ? <div> <div>{props.login}</div>
                         <div className={s.logout}>
@@ -18,7 +28,7 @@ const Header = (props) => {
                     <NavLink to={'/login'}>Войти</NavLink>}
 
             </div>
-        </header>
+        </HeaderStyle>
     )
 }
 

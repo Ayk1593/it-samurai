@@ -19,7 +19,6 @@ let Users: React.FC<PropsType> = ({currentPage, onPageChanged, totalUsersCount, 
     return <div>
         <Paginator currentPage={currentPage} onPageChanged={onPageChanged}
                    totalItemsCount={totalUsersCount} pageSize={pageSize}/>
-
         {
             users.map(u => <User key={u.id}
                                  user={u}

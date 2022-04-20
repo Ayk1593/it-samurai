@@ -21,6 +21,7 @@ const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
     )
 
     const activateEditMode = () => {
+        debugger
         if (props.profile.userId === props.userId) {
             setEditMode(true);
         }
@@ -36,7 +37,7 @@ const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
         <div className={s.status}>
             {!editMode &&
             <div className={s.profile_status}>
-                <b> Status: </b> <span onDoubleClick={activateEditMode}> {props.status || "-----"}</span>
+                <b> Статус: </b> <span onDoubleClick={activateEditMode}> {props.status || "-----"} </span>
             </div>}
             {editMode &&
             <div>

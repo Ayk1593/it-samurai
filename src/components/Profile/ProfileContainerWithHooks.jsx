@@ -39,7 +39,7 @@ function ProfileContainerWithHooks(props) {
             <Profile {...props} profile={props.profile} status={props.status}
                      updateStatus={props.updateStatus} isOwner={!props.match.params.userId}
                      savePhoto={props.savePhoto} saveProfile={props.saveProfile}
-                     changeStateEditMode={props.changeStateEditMode} userId={props.match.params.userId}/>
+                     changeStateEditMode={props.changeStateEditMode} userId={props.userId} userIdUrl={props.match.params.userId}/>
         )
 }
 

@@ -80,8 +80,7 @@ const ProfileDataForm = ({profile, error, stateEditMode, ...props}) => {
                         control={control}
                         name="lookingForAJobDescription"
                         defaultValue={profile.lookingForAJobDescription}
-                        rules={{
-                            required: "Поле обязательно к заполнению", maxLength: {
+                        rules={{ maxLength: {
                                 value: 100,
                                 message: "Max length is 100 symbols"
                             }
@@ -108,8 +107,7 @@ const ProfileDataForm = ({profile, error, stateEditMode, ...props}) => {
                         control={control}
                         name="aboutMe"
                         defaultValue={profile.aboutMe}
-                        rules={{
-                            required: "Поле обязательно к заполнению", maxLength: {
+                        rules={{ maxLength: {
                                 value: 100,
                                 message: "Max length is 100 symbols"
                             }

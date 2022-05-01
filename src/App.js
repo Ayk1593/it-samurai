@@ -14,10 +14,8 @@ import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
 import {withSuspense} from "./hoc/withSuspense";
-
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainerWithHooks = React.lazy(() => import('./components/Profile/ProfileContainerWithHooks'));
-
 
 class App extends Component {
 
@@ -33,7 +31,6 @@ class App extends Component {
         return (
             <div className='box'>
                 <div className='app-wrapper'>
-
                     <HeaderContainer/>
                     <Navbar/>
                     <div className='app-wrapper-content'>
@@ -54,10 +51,8 @@ class App extends Component {
                 </div>
             </div>
         )
-
     }
 }
-
 
 const mapStateToProps = (state) => ({
     initialized: state.app.initialized

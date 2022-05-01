@@ -35,10 +35,6 @@ let User = ({user, followingInProgress, follow, unfollow, ...props }) => {
                             <div>{user.name}</div>
                             <div>{user.status}</div>
                         </div>
-                        <div className={styles.location}>
-                            <div>{"user.location.country"}</div>
-                            <div>{"user.location.city"}</div>
-                        </div>
                     </div>
                 </div>
 

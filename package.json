@@ -2,7 +2,7 @@
   "name": "SamuraiJs",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ayk1593.github.io/it-samurai",
+  "homepage": "https://ayk1593.github.io/my-social-network",
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",

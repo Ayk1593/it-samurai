@@ -28,6 +28,14 @@
      margin: 10px;
 }
 
+.testLogPass {
+    width: 180px;
+    margin: 10px;
+    padding: 0 10px 0 10px;
+    border: 2px solid blue;
+    border-radius: 10px;
+}
+
 .textArea {
     margin-bottom: 10px;
 }

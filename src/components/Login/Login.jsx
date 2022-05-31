@@ -82,6 +82,8 @@ const LoginForm = ({captchaUrl, isIncorrectLogOrPass, errorMessage, captchaUrlNu
 
             </div>
 
+
+
             {captchaUrl && <img src={captchaUrl}/>}
             {captchaUrl &&
             <div className={style.inputCaptcha}>
@@ -104,6 +106,12 @@ const LoginForm = ({captchaUrl, isIncorrectLogOrPass, errorMessage, captchaUrlNu
 
             <div className={style.textField}>
                 <Button variant="contained" type="submit">Войти</Button>
+            </div>
+
+            <div className={style.testLogPass}>
+               <h5> Тестовый логин и пароль: </h5>
+               <h5> react-redux-test@mail.ru </h5>
+                <h5> 12345678 </h5>
             </div>
 
         </form>

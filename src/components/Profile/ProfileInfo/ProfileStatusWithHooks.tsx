@@ -21,7 +21,6 @@ const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
     )
 
     const activateEditMode = () => {
-        debugger
         if (props.profile.userId === props.userId) {
             setEditMode(true);
         }

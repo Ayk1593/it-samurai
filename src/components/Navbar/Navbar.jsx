@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import s from './Navbar.module.css';
-import {NavLink} from "react-router-dom";
+import {NavLink, Route} from "react-router-dom";
 import FriendsContainer from "./Sidebar/SidebarContainer";
+import Login from "../Login/Login";
 
 
 const Navbar = () => {
@@ -28,7 +29,9 @@ const Navbar = () => {
                 <NavLink to='/Settings' activeClassName={s.active}>Settings</NavLink>
             </div>
 
-            <FriendsContainer />
+            <Route exact path='/profile' render={() => <FriendsContainer/>}/>
+
+
         </nav>
 
 

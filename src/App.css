@@ -22,7 +22,7 @@ ul li {
     grid-template-areas: "h h" "n c";
 
     grid-template-rows: auto 1fr;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 3fr 9fr;
     /*grid-gap: 10px;*/
 
 }

@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import {loginValidation} from "../common/FormsControls/Validations";
 
 
 const LoginForm = ({captchaUrl, isIncorrectLogOrPass, errorMessage, captchaUrlNull, isIncorrect, ...props}) => {
@@ -23,8 +24,8 @@ const LoginForm = ({captchaUrl, isIncorrectLogOrPass, errorMessage, captchaUrlNu
     }
 
     useEffect(() => {
-       captchaUrlNull();
-       isIncorrect(false);
+        captchaUrlNull();
+        isIncorrect(false);
     }, [])
 
     return (
@@ -34,7 +35,7 @@ const LoginForm = ({captchaUrl, isIncorrectLogOrPass, errorMessage, captchaUrlNu
                 <Controller
                     control={control}
                     name="email"
-                    rules={{required: "Поле обязательно к заполнению"}}
+                    rules={loginValidation}
                     render={({field}) => (
                         <TextField
                             size="small"
@@ -83,7 +84,6 @@ const LoginForm = ({captchaUrl, isIncorrectLogOrPass, errorMessage, captchaUrlNu
             </div>
 
 
-
             {captchaUrl && <img src={captchaUrl}/>}
             {captchaUrl &&
             <div className={style.inputCaptcha}>
@@ -101,7 +101,7 @@ const LoginForm = ({captchaUrl, isIncorrectLogOrPass, errorMessage, captchaUrlNu
                             helperText={errors.captcha?.message}
                         />
                     )}
-                /> </div>}
+                /></div>}
 
 
             <div className={style.textField}>
@@ -109,8 +109,8 @@ const LoginForm = ({captchaUrl, isIncorrectLogOrPass, errorMessage, captchaUrlNu
             </div>
 
             <div className={style.testLogPass}>
-               <h5> Тестовый логин и пароль: </h5>
-               <h5> react-redux-test@mail.ru </h5>
+                <h5> Тестовый логин и пароль: </h5>
+                <h5> react-redux-test@mail.ru </h5>
                 <h5> 12345678 </h5>
             </div>
 
@@ -131,7 +131,8 @@ const Login = (props) => {
     return (
         <div>
             <h2 className={style.textField}>Вход</h2>
-            <LoginForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} isIncorrectLogOrPass={props.isIncorrectLogOrPass}
+            <LoginForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}
+                       isIncorrectLogOrPass={props.isIncorrectLogOrPass}
                        errorMessage={props.errorMessage}
                        captchaUrlNull={props.captchaUrlNull}
                        isIncorrect={props.isIncorrect}/>

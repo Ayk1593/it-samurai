@@ -14,10 +14,10 @@ const STATE_EDIT_MODE = 'STATE_EDIT_MODE';
 
 let initialState = {
     posts: [
-        {id: 1, message: 'Hi, how are you?', likesCount: 15},
-        {id: 2, message: 'It\'s my first post', likesCount: 20},
-        {id: 2, message: 'Blabla', likesCount: 11},
-        {id: 2, message: 'Dada', likesCount: 5}
+        {id: 1, message: 'Hi, how are you?', likesCount: 15, date: '01.02.2022 10:04:05'},
+        {id: 2, message: 'It\'s my first post', likesCount: 20, date: '05.02.2022 15:08:15'},
+        {id: 2, message: 'Blabla', likesCount: 11, date: '17.04.2022 16:55:28'},
+        {id: 2, message: 'Dada', likesCount: 5, date: '25.05.2022 12:28:44'}
     ] as Array<PostType>,
     profile: null as ProfileType | null,
     status: "",
@@ -32,11 +32,12 @@ const profileReducer = (state = initialState, action: any): InitialStateType => 
             let newPost = {
                 id: 5,
                 message: action.newPostText,
-                likesCount: 0
+                likesCount: 0,
+                date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString()
             };
             return {
                 ...state,
-                posts: [...state.posts, newPost],
+                posts: [newPost, ...state.posts],
             }
         case SET_STATUS:
             return {

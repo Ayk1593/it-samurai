@@ -8,3 +8,9 @@
     height: 50px;
 
 }
+
+.time {
+    font-size: 12px;
+    color: blue;
+    padding-left: 150px;
+}

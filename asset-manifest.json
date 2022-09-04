@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/my-social-network/static/css/main.cd9d1ffb.chunk.css",
+    "main.js": "/my-social-network/static/js/main.30a051e6.chunk.js",
+    "main.js.map": "/my-social-network/static/js/main.30a051e6.chunk.js.map",
+    "runtime-main.js": "/my-social-network/static/js/runtime-main.0ffbb5e7.js",
+    "runtime-main.js.map": "/my-social-network/static/js/runtime-main.0ffbb5e7.js.map",
+    "static/js/2.03991a25.chunk.js": "/my-social-network/static/js/2.03991a25.chunk.js",
+    "static/js/2.03991a25.chunk.js.map": "/my-social-network/static/js/2.03991a25.chunk.js.map",
+    "static/css/3.a4ef50fc.chunk.css": "/my-social-network/static/css/3.a4ef50fc.chunk.css",
+    "static/js/3.a6cb73ba.chunk.js": "/my-social-network/static/js/3.a6cb73ba.chunk.js",
+    "static/js/3.a6cb73ba.chunk.js.map": "/my-social-network/static/js/3.a6cb73ba.chunk.js.map",
+    "static/css/4.18a4bf93.chunk.css": "/my-social-network/static/css/4.18a4bf93.chunk.css",
+    "static/js/4.5faba9de.chunk.js": "/my-social-network/static/js/4.5faba9de.chunk.js",
+    "static/js/4.5faba9de.chunk.js.map": "/my-social-network/static/js/4.5faba9de.chunk.js.map",
+    "static/js/5.e8b11a2c.chunk.js": "/my-social-network/static/js/5.e8b11a2c.chunk.js",
+    "static/js/5.e8b11a2c.chunk.js.map": "/my-social-network/static/js/5.e8b11a2c.chunk.js.map",
+    "index.html": "/my-social-network/index.html",
+    "static/css/3.a4ef50fc.chunk.css.map": "/my-social-network/static/css/3.a4ef50fc.chunk.css.map",
+    "static/css/4.18a4bf93.chunk.css.map": "/my-social-network/static/css/4.18a4bf93.chunk.css.map",
+    "static/css/main.cd9d1ffb.chunk.css.map": "/my-social-network/static/css/main.cd9d1ffb.chunk.css.map",
+    "static/js/2.03991a25.chunk.js.LICENSE.txt": "/my-social-network/static/js/2.03991a25.chunk.js.LICENSE.txt",
+    "static/media/preloader.4b4fa2fc.svg": "/my-social-network/static/media/preloader.4b4fa2fc.svg",
+    "static/media/profile.png": "/my-social-network/static/media/profile.b579f09b.png",
+    "static/media/user.png": "/my-social-network/static/media/user.96e310a6.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0ffbb5e7.js",
+    "static/js/2.03991a25.chunk.js",
+    "static/css/main.cd9d1ffb.chunk.css",
+    "static/js/main.30a051e6.chunk.js"
+  ]
+}

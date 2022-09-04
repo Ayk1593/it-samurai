@@ -71,6 +71,5 @@ const SamuraiJSApp = (props) => {
     </HashRouter>
 }
 
-y
 export default SamuraiJSApp;
 

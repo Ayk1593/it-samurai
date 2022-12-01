@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./Users.module.css";
 import {connect} from "react-redux";
 import {
     follow,
@@ -59,7 +60,7 @@ class UsersContainer extends React.Component<PropsType> {
 
     render() {
 
-        return <>
+        return <div className={styles.users_container}>
             <h2>{this.props.pageTitle}</h2>
             {this.props.isFetching ? <Preloader/> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
@@ -71,7 +72,7 @@ class UsersContainer extends React.Component<PropsType> {
                    unfollow={this.props.unfollow}
                    followingInProgress={this.props.followingInProgress}
             />
-        </>
+        </div>
     }
 }
 

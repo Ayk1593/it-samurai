@@ -9,14 +9,13 @@ ul li {
 
 .box {
     width: auto;
-    height: auto;
-    background-color: #edf0f7;
+
 }
 
 .app-wrapper {
     display: grid;
     width: 1200px;
-    height: auto;
+    height: 100vh;
     margin: 0 auto;
 
     grid-template-areas: "h h" "n c";
